@@ -1,0 +1,293 @@
+{
+  "tasks": [],
+  "history": [
+    {
+      "date": "2026-04-24",
+      "tasks": [
+        {
+          "id": 1,
+          "text": "dada",
+          "created_at": "2026-04-24 00:54:30",
+          "completed": false,
+          "has_alarm": false,
+          "alarm_time": null,
+          "date": "2026-04-24"
+        },
+        {
+          "id": 2,
+          "text": "asdasdf",
+          "created_at": "2026-04-24 00:54:35",
+          "completed": false,
+          "has_alarm": false,
+          "alarm_time": null,
+          "date": "2026-04-24"
+        }
+      ],
+      "report": {
+        "date": "2026-04-24",
+        "total_tasks": 2,
+        "completed_tasks": 0,
+        "pending_tasks": 2,
+        "completed_list": [],
+        "pending_list": [
+          {
+            "id": 1,
+            "text": "dada",
+            "created_at": "2026-04-24 00:54:30",
+            "completed": false,
+            "has_alarm": false,
+            "alarm_time": null,
+            "date": "2026-04-24"
+          },
+          {
+            "id": 2,
+            "text": "asdasdf",
+            "created_at": "2026-04-24 00:54:35",
+            "completed": false,
+            "has_alarm": false,
+            "alarm_time": null,
+            "date": "2026-04-24"
+          }
+        ],
+        "completion_rate": 0.0
+      }
+    },
+    {
+      "date": "2026-04-24",
+      "tasks": [
+        {
+          "id": 2,
+          "text": "dada",
+          "created_at": "2026-04-24 00:56:06",
+          "completed": true,
+          "has_alarm": false,
+          "alarm_time": null,
+          "date": "2026-04-24",
+          "completed_at": "2026-04-24 00:56:09"
+        }
+      ],
+      "report": {
+        "date": "2026-04-24",
+        "total_tasks": 1,
+        "completed_tasks": 1,
+        "pending_tasks": 0,
+        "completed_list": [
+          {
+            "id": 2,
+            "text": "dada",
+            "created_at": "2026-04-24 00:56:06",
+            "completed": true,
+            "has_alarm": false,
+            "alarm_time": null,
+            "date": "2026-04-24",
+            "completed_at": "2026-04-24 00:56:09"
+          }
+        ],
+        "pending_list": [],
+        "completion_rate": 100.0
+      }
+    },
+    {
+      "date": "2026-04-24",
+      "tasks": [
+        {
+          "id": 3,
+          "text": "daadasad",
+          "created_at": "2026-04-24 00:56:15",
+          "completed": false,
+          "has_alarm": false,
+          "alarm_time": null,
+          "date": "2026-04-24"
+        },
+        {
+          "id": 4,
+          "text": "asdq",
+          "created_at": "2026-04-24 00:56:18",
+          "completed": false,
+          "has_alarm": false,
+          "alarm_time": null,
+          "date": "2026-04-24"
+        },
+        {
+          "id": 5,
+          "text": "asd",
+          "created_at": "2026-04-24 00:56:21",
+          "completed": false,
+          "has_alarm": false,
+          "alarm_time": null,
+          "date": "2026-04-24"
+        },
+        {
+          "id": 6,
+          "text": "asd",
+          "created_at": "2026-04-24 00:56:22",
+          "completed": false,
+          "has_alarm": false,
+          "alarm_time": null,
+          "date": "2026-04-24"
+        }
+      ],
+      "report": {
+        "date": "2026-04-24",
+        "total_tasks": 4,
+        "completed_tasks": 0,
+        "pending_tasks": 4,
+        "completed_list": [],
+        "pending_list": [
+          {
+            "id": 3,
+            "text": "daadasad",
+            "created_at": "2026-04-24 00:56:15",
+            "completed": false,
+            "has_alarm": false,
+            "alarm_time": null,
+            "date": "2026-04-24"
+          },
+          {
+            "id": 4,
+            "text": "asdq",
+            "created_at": "2026-04-24 00:56:18",
+            "completed": false,
+            "has_alarm": false,
+            "alarm_time": null,
+            "date": "2026-04-24"
+          },
+          {
+            "id": 5,
+            "text": "asd",
+            "created_at": "2026-04-24 00:56:21",
+            "completed": false,
+            "has_alarm": false,
+            "alarm_time": null,
+            "date": "2026-04-24"
+          },
+          {
+            "id": 6,
+            "text": "asd",
+            "created_at": "2026-04-24 00:56:22",
+            "completed": false,
+            "has_alarm": false,
+            "alarm_time": null,
+            "date": "2026-04-24"
+          }
+        ],
+        "completion_rate": 0.0
+      }
+    },
+    {
+      "date": "2026-04-24",
+      "tasks": [
+        {
+          "id": 4,
+          "text": "asdas",
+          "created_at": "2026-04-24 00:57:38",
+          "completed": true,
+          "has_alarm": false,
+          "alarm_time": null,
+          "date": "2026-04-24",
+          "completed_at": "2026-04-24 00:57:53"
+        },
+        {
+          "id": 5,
+          "text": "asdas",
+          "created_at": "2026-04-24 00:57:40",
+          "completed": true,
+          "has_alarm": false,
+          "alarm_time": null,
+          "date": "2026-04-24",
+          "completed_at": "2026-04-24 00:57:54"
+        },
+        {
+          "id": 6,
+          "text": "dsadf",
+          "created_at": "2026-04-24 00:57:45",
+          "completed": true,
+          "has_alarm": false,
+          "alarm_time": null,
+          "date": "2026-04-24",
+          "completed_at": "2026-04-24 00:57:55"
+        },
+        {
+          "id": 7,
+          "text": "g",
+          "created_at": "2026-04-24 00:57:47",
+          "completed": true,
+          "has_alarm": false,
+          "alarm_time": null,
+          "date": "2026-04-24",
+          "completed_at": "2026-04-24 00:57:56"
+        },
+        {
+          "id": 8,
+          "text": "asdf",
+          "created_at": "2026-04-24 00:57:49",
+          "completed": true,
+          "has_alarm": false,
+          "alarm_time": null,
+          "date": "2026-04-24",
+          "completed_at": "2026-04-24 00:57:57"
+        }
+      ],
+      "report": {
+        "date": "2026-04-24",
+        "total_tasks": 5,
+        "completed_tasks": 5,
+        "pending_tasks": 0,
+        "completed_list": [
+          {
+            "id": 4,
+            "text": "asdas",
+            "created_at": "2026-04-24 00:57:38",
+            "completed": true,
+            "has_alarm": false,
+            "alarm_time": null,
+            "date": "2026-04-24",
+            "completed_at": "2026-04-24 00:57:53"
+          },
+          {
+            "id": 5,
+            "text": "asdas",
+            "created_at": "2026-04-24 00:57:40",
+            "completed": true,
+            "has_alarm": false,
+            "alarm_time": null,
+            "date": "2026-04-24",
+            "completed_at": "2026-04-24 00:57:54"
+          },
+          {
+            "id": 6,
+            "text": "dsadf",
+            "created_at": "2026-04-24 00:57:45",
+            "completed": true,
+            "has_alarm": false,
+            "alarm_time": null,
+            "date": "2026-04-24",
+            "completed_at": "2026-04-24 00:57:55"
+          },
+          {
+            "id": 7,
+            "text": "g",
+            "created_at": "2026-04-24 00:57:47",
+            "completed": true,
+            "has_alarm": false,
+            "alarm_time": null,
+            "date": "2026-04-24",
+            "completed_at": "2026-04-24 00:57:56"
+          },
+          {
+            "id": 8,
+            "text": "asdf",
+            "created_at": "2026-04-24 00:57:49",
+            "completed": true,
+            "has_alarm": false,
+            "alarm_time": null,
+            "date": "2026-04-24",
+            "completed_at": "2026-04-24 00:57:57"
+          }
+        ],
+        "pending_list": [],
+        "completion_rate": 100.0
+      }
+    }
+  ]
+}

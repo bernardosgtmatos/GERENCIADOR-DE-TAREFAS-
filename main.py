@@ -1,8 +1,7 @@
 import flet as ft
-from datetime import datetime, date, timedelta
+from datetime import datetime, date
 import json
 import os
-from zoneinfo import ZoneInfo
 
 class TaskApp:
     def __init__(self):
@@ -99,11 +98,11 @@ def main(page: ft.Page):
     page.theme_mode = ft.ThemeMode.LIGHT
     page.padding = 20
     page.bgcolor = ft.Colors.GREY_50
+    page.window_width = 450
+    page.window_height = 700
+    page.window_resizable = True
     
     app = TaskApp()
-    
-    # Estado da navegação
-    current_view = "main"
     
     # Componentes da UI
     task_input = ft.TextField(
@@ -116,14 +115,14 @@ def main(page: ft.Page):
     )
     
     alarm_switch = ft.Switch(value=False, label="Definir Alarme")
+    
+    # TimePicker
     alarm_time_picker = ft.TimePicker(
         confirm_text="Confirmar",
         cancel_text="Cancelar",
-        hour_label="Hora",
-        minute_label="Minuto",
     )
-    alarm_time_display = ft.Text("", size=12, color=ft.Colors.GREY_600)
     
+    alarm_time_display = ft.Text("", size=12, color=ft.Colors.GREY_600)
     selected_alarm_time = None
     
     def show_alarm_picker(e):
@@ -141,7 +140,7 @@ def main(page: ft.Page):
     alarm_time_picker.on_change = on_alarm_confirmed
     
     # Container de tarefas
-    tasks_container = ft.Column(spacing=10, scroll=ft.ScrollMode.AUTO)
+    tasks_container = ft.Column(spacing=10, scroll=ft.ScrollMode.AUTO, expand=True)
     
     def refresh_tasks():
         """Atualiza a lista de tarefas"""
@@ -151,7 +150,7 @@ def main(page: ft.Page):
             tasks_container.controls.append(
                 ft.Container(
                     content=ft.Text("📋 Nenhuma tarefa pendente", size=14, color=ft.Colors.GREY_600),
-                    alignment=ft.alignment.center,
+                    alignment=ft.Alignment(0, 0),  # Centro
                     padding=30
                 )
             )
@@ -159,19 +158,17 @@ def main(page: ft.Page):
             for task in app.tasks:
                 task_card = ft.Card(
                     content=ft.Container(
-                        content=ft.Column([
-                            ft.Row([
-                                ft.Checkbox(
-                                    value=task['completed'],
-                                    on_change=lambda e, t=task: toggle_task(e, t)
-                                ),
-                                ft.Column([
-                                    ft.Text(task['text'], size=16, weight=ft.FontWeight.W500),
-                                    ft.Text(f"📅 Criado: {task['created_at']}", size=11, color=ft.Colors.GREY_600),
-                                    ft.Text(f"🔔 {task['alarm_time']}" if task['has_alarm'] and task.get('alarm_time') else "", size=11, color=ft.Colors.BLUE_600),
-                                ], spacing=3, expand=True),
-                            ], spacing=10),
-                        ]),
+                        content=ft.Row([
+                            ft.Checkbox(
+                                value=task['completed'],
+                                on_change=lambda e, t=task: toggle_task(e, t)
+                            ),
+                            ft.Column([
+                                ft.Text(task['text'], size=16, weight=ft.FontWeight.W_500),
+                                ft.Text(f"📅 Criado: {task['created_at']}", size=11, color=ft.Colors.GREY_600),
+                                ft.Text(f"🔔 Alarme: {task['alarm_time']}" if task['has_alarm'] and task.get('alarm_time') else "", size=11, color=ft.Colors.BLUE_600),
+                            ], spacing=3, expand=True),
+                        ], spacing=10),
                         padding=15,
                         border_radius=10,
                     ),
@@ -221,11 +218,11 @@ def main(page: ft.Page):
             ft.Text(f"✅ Tarefas Concluídas: {report['completed_tasks']}/{report['total_tasks']}"),
             ft.Text(f"📈 Taxa de Conclusão: {report['completion_rate']:.1f}%"),
             ft.Divider(),
-            ft.Text("📋 Tarefas Concluídas:", weight=ft.FontWeight.W500),
+            ft.Text("📋 Tarefas Concluídas:", weight=ft.FontWeight.W_500),
             ft.Column([ft.Text(f"• {t['text']}", size=12) for t in report['completed_list']], spacing=5),
-            ft.Text("⏰ Tarefas Pendentes:", weight=ft.FontWeight.W500),
+            ft.Text("⏰ Tarefas Pendentes:", weight=ft.FontWeight.W_500),
             ft.Column([ft.Text(f"• {t['text']}", size=12) for t in report['pending_list']], spacing=5),
-        ], spacing=10, scroll=ft.ScrollMode.AUTO)
+        ], spacing=10, scroll=ft.ScrollMode.AUTO, expand=True)
         
         dialog = ft.AlertDialog(
             title=ft.Text("Relatório do Dia"),
@@ -251,7 +248,7 @@ def main(page: ft.Page):
             show_snackbar("📭 Nenhum histórico disponível ainda!")
             return
         
-        history_list = ft.Column(spacing=10, scroll=ft.ScrollMode.AUTO)
+        history_list = ft.Column(spacing=10, scroll=ft.ScrollMode.AUTO, expand=True)
         
         for history in reversed(app.tasks_history):
             date_str = history['date']
@@ -266,7 +263,8 @@ def main(page: ft.Page):
                         ft.ElevatedButton(
                             "Ver detalhes",
                             on_click=lambda e, d=date_str: show_day_details(d),
-                            style=ft.ButtonStyle(color=ft.Colors.BLUE_600)
+                            bgcolor=ft.Colors.BLUE_600,
+                            color=ft.Colors.WHITE
                         )
                     ], spacing=5),
                     padding=15,
@@ -298,11 +296,11 @@ def main(page: ft.Page):
         detail_content = ft.Column([
             ft.Text(f"📅 {target_date}", size=18, weight=ft.FontWeight.BOLD),
             ft.Divider(),
-            ft.Text("✅ Tarefas Concluídas:", weight=ft.FontWeight.W500),
+            ft.Text("✅ Tarefas Concluídas:", weight=ft.FontWeight.W_500),
             ft.Column([ft.Text(f"• {t['text']}", size=12) for t in completed_tasks], spacing=5),
-            ft.Text("⏰ Tarefas Pendentes:", weight=ft.FontWeight.W500),
+            ft.Text("⏰ Tarefas Pendentes:", weight=ft.FontWeight.W_500),
             ft.Column([ft.Text(f"• {t['text']}", size=12) for t in pending_tasks], spacing=5),
-        ], spacing=10, scroll=ft.ScrollMode.AUTO)
+        ], spacing=10, scroll=ft.ScrollMode.AUTO, expand=True)
         
         detail_dialog = ft.AlertDialog(
             title=ft.Text("Detalhes do Dia"),
@@ -334,10 +332,32 @@ def main(page: ft.Page):
         margin=ft.margin.only(bottom=20)
     )
     
+    # Botões usando texto emoji
+    add_button = ft.FloatingActionButton(
+        content=ft.Text("➕", size=24),
+        on_click=add_task_click,
+        bgcolor=ft.Colors.BLUE_600,
+        mini=True
+    )
+    
+    alarm_button = ft.FloatingActionButton(
+        content=ft.Text("⏰", size=20),
+        on_click=show_alarm_picker,
+        bgcolor=ft.Colors.GREY_300,
+        mini=True,
+        disabled=not alarm_switch.value
+    )
+    
+    def update_alarm_button(e):
+        alarm_button.disabled = not alarm_switch.value
+        page.update()
+    
+    alarm_switch.on_change = update_alarm_button
+    
     input_area = ft.Container(
         content=ft.Column([
-            ft.Row([task_input, ft.IconButton(ft.icons.ADD, on_click=add_task_click, icon_size=30, style=ft.ButtonStyle(color=ft.Colors.BLUE_600))]),
-            ft.Row([alarm_switch, ft.IconButton(ft.icons.ACCESS_ALARM, on_click=show_alarm_picker if alarm_switch.value else None, icon_size=20)]),
+            ft.Row([task_input, add_button], spacing=10, alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+            ft.Row([alarm_switch, alarm_button], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
             alarm_time_display
         ], spacing=10),
         bgcolor=ft.Colors.WHITE,
@@ -346,12 +366,24 @@ def main(page: ft.Page):
         shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.Colors.GREY_300)
     )
     
+    # Botões de ação
+    history_button = ft.FloatingActionButton(
+        content=ft.Text("📜", size=20),
+        on_click=show_history,
+        bgcolor=ft.Colors.GREY_300,
+        mini=True
+    )
+    
+    end_day_button = ft.FloatingActionButton(
+        content=ft.Text("✅", size=20),
+        on_click=end_day_click,
+        bgcolor=ft.Colors.GREEN_600,
+        mini=True
+    )
+    
     tasks_header = ft.Row([
         ft.Text("📋 Minhas Tarefas", size=20, weight=ft.FontWeight.BOLD),
-        ft.Row([
-            ft.IconButton(ft.icons.HISTORY, on_click=show_history, tooltip="Histórico", icon_size=24),
-            ft.IconButton(ft.icons.DONE_ALL, on_click=end_day_click, tooltip="Finalizar Dia", icon_size=24, icon_color=ft.Colors.GREEN_600),
-        ])
+        ft.Row([history_button, end_day_button], spacing=10)
     ])
     
     main_layout = ft.Column([
@@ -363,19 +395,14 @@ def main(page: ft.Page):
         tasks_container,
     ], spacing=10, expand=True)
     
-    # Configuração do time picker
-    page.overlay.append(alarm_time_picker)
-    
     # Adiciona layout à página
     page.add(main_layout)
     
     # Carrega tarefas iniciais
     refresh_tasks()
     
-    # Configurações da página
-    page.window_width = 450
-    page.window_height = 700
-    page.window_resizable = True
+    # Adiciona o time picker ao overlay
+    page.overlay.append(alarm_time_picker)
     page.update()
 
 if __name__ == "__main__":
